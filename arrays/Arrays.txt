@@ -1,0 +1,25 @@
+🔅 Arrays = Lists
+
+🔅 📝 Any text should be surrounded by quotation mark and split by comma.
+   📝 Have to be inside []
+
+🔅To create variable with arrays:
+      var varName = ['item 1', 'item 2', 'item 3']
+
+🔅To display arrays:
+      console.log('Things:', varName)
+
+🔅To add arrays:
+      varName.push('new array')
+
+🔅To change arrays: 
+      varName[] ---> Inside the brackets put which array that we want to change. ATTENTION: 1st item is 0.
+
+                  |
+                  |
+                  V
+
+      varName[0] = 'item 1 updated' ---> Change the 1st array.
+
+🔅To delete arrays:
+      varName.splice (a, b)---> a is where to start deleting things, b is HOW MANY items we want to delete. 
