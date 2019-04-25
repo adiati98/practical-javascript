@@ -1,0 +1,119 @@
+
+🔅 Functions are just recipes:
+
+makeTurkeySandwich
+   Get one slice of bread.
+   Add turkey.
+   Put a slice of bread on top.
+
+               |
+               |
+               |
+               V
+
+function makeTurkeySandwich() {
+   Get one slice of bread;
+   Add turkey;
+   Put a slice of bread on top;
+}
+
+makeTurkeySandwich()
+
+
+
+🔅 We can CUSTOMIZE the behaviour of a function.
+
+👁‍🗨 Handling one recipe for different ingredients.
+
+
+makeSandwichWith ______
+   Get one slice of bread.
+   Add ______.
+   Put a slice of bread on top.
+
+makeSandwichWith _tuna_
+
+               |
+               |
+               |
+               V
+
+function makeSandwichWith(filling) {
+   Get one slice of bread;
+   Add filling;
+   Put a slice of bread on top;
+}
+
+makeSandwichWith('tuna')
+
+
+👁‍🗨 function sayHiTo(person) {
+      console.log('Hi', person)
+   }
+
+   sayHiTo('Jenny')        // person = 'Jenny' 
+
+   ❗ Think (person) as a variable that WILL BE given a value. And they will be GIVEN a value when we ASSIGN the argument to call the function.
+
+
+
+
+🔅 Create a function to display item
+
+var varName = ['item 1', 'item 2', 'item 3']
+
+function functionName() {
+   console.log('Things: ', varName);
+}
+
+functionName()
+
+
+
+🔅 Create a function to add item
+
+var varName = ['item 1', 'item 2', 'item 3']
+
+function functionName() {
+   varName.push('new item');
+}
+
+functionName()  // This will add one 'new item'
+functionName()  // This will add one more 'new item'
+
+
+---------- Above code will only add same item (in this example: new item) all over again. So we could customize the function and create function inside function to achieve DIFFERENT items and call multiple functions with one function ----------- 
+
+
+var varName = ['item 1', 'item 2', 'item 3']
+
+function functionName() {
+  console.log('I need to:', varName)
+}
+
+function addItem(itemToBeAssignLater) {
+  varName.push(itemToBeAssignLater);
+  functionName();
+}
+
+addItem('item 4')
+addItem('item 5')
+
+
+
+🔅 Create a function to change item
+
+We need to have 2 arguments in order to do this flexibly. One is the position of the item that we want to change, and the other is the changed value.
+
+var varName = ['item 1', 'item 2', 'item 3']
+
+function functionName() {
+  console.log('I need to:', varName)
+}
+
+function changeItem(position, itemToBeAssignLater) {
+  varName[position] = itemToBeAssignLater;
+  functionName();
+}
+
+changeItem(0, 'update item 1')
