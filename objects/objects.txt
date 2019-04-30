@@ -1,0 +1,35 @@
+🔅 Object is used to group data and functions together
+
+🔅 Let's say one object is a computer. And the specification of the computer are the properties:
+
+   operatingSystem windows
+   screenSize 15 inches
+   purchaseYear 2018
+
+            |
+            |
+            |
+            |
+            V
+
+{
+   operatingSystem: 'windows',
+   screenSize: '15 inches',
+   purchaseYear: 2018
+}
+
+🔅 When we want to use the objects, we can assign them to a variable.
+
+var myComputer = {
+   operatingSystem: 'windows',
+   screenSize: '15 inches',
+   purchaseYear: 2018
+}
+
+🔅 Syntax to call one property:
+
+varName.property
+
+🔅 Object is good for organizing our code. Because all the stuff that related to the variable is on the variable's object.
+
+🔅 When we want to refer to an object itself inside of a method we have to use 'this' keyword.

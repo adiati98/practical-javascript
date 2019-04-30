@@ -1,0 +1,26 @@
+🔅 We can place functions on objects. And when we place a function on an object, we don't need to name the function, because we will access the function by the property name.
+
+
+var varName = {
+   propertyName: 'something',
+   propertyNameWithFunction: function() {
+      console.log(this);
+   }
+}
+
+varName.propertyNameWithFunction();
+
+
+
+
+
+❗ We use (this) to reference the object that we're on.
+
+❗ When we want to printout a single property we use below syntax:
+
+console.log(this.propertyName)
+
+🔅 A function inside an object is called METHOD
+
+🔅 We use empty function on object because we call the function with the property.
+
