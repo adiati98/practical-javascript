@@ -1,0 +1,60 @@
+🔅 In this part we want to change the addTodo method so it adds object (with more data) instead of just text to the array.
+
+🔅 We want to represent more data and object is the best way to represent more complicated data with different properties.
+
+🔅 var todoList = {
+	todos: [], -----> We empty this because we will fill objects here instead of values
+
+	displayTodos: function() {
+		console.log('I need to: ', this.todos);
+	},
+
+	addTodo: function(todoText) {
+		this.todos.push({          ----------------------> Add object instead of text (properties: todoText & completed) 
+      1️⃣   todoText: todoText,
+            
+            |          |
+            |          |
+            |          |
+            V          V
+        
+        PROPERTY     Refer to PARAMETER (as text description)
+
+      2️⃣   completed: false        -----------------------> To see if todos have already completed or not. Default: false 	
+																						because we haven't do any task yet.
+      }); 
+		this.displayTodos();
+	},
+	changeTodo: function(positionToChange, todoText) {    ------------> todoList.changeTodo should change todoText property
+		this.todos[positionToChange].todoText = todoText;
+											 ---------   --------
+											 	  |			  |
+												  |			  |
+												  |           |
+												  |			  V
+												  |	Pass in new value (in parameters)
+												  |		to call the function
+												  |
+												  V 
+								Grab the todoText property (1️⃣)
+											on todo object
+		this.displayTodos();
+	},
+	deleteTodo: function(position) {
+		this.todos.splice(position, 1);
+		this.displayTodos();
+	}
+};
+
+
+
+
+📝 todoList.toggleCompleted should flip the completed property just like an on/off button. 
+
+🔅 Bang operator (!) basically takes opposite of what comes after it.
+		!true ----> false
+		!false ---> true
+
+🔅 We can change the value of the boolean by setting/change the value to the opposite:
+		false = !false ---> true
+		true = !true -----> false 
