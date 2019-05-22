@@ -5,7 +5,7 @@ var todoList = {
 	},
 	addTodo: function(todoText) {
 		this.todos.push({
-			// Add todoText as OBJECT
+			// Add todoText as OBJECT, because we want to have todoText (string) property and completed (boolean) property
 			todoText: todoText,
 			completed: false
 		});
@@ -20,7 +20,7 @@ var todoList = {
 		this.displayTodos();
 	},
 	toggleCompleted: function(positionToModify) {
-		var todo = this.todos[positionToModify]; // Setting up this variable to save some typing so we can apply it below
+		var todo = this.todos[positionToModify]; // Setting up this variable to save some typing so we can apply it as below
 		todo.completed = !todo.completed;
 		this.displayTodos();
 	}
