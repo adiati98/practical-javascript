@@ -1,0 +1,58 @@
+🔅 For loops is to repeat certain amount of code, any number of times.
+
+🔅 i = 0 ---> keep track of i from 0            // Initialization   ===> Create a variable where we start tracking.
+   Say "hey" if i < 3  ---> say "hey" 3 times.  // Condition        ===> When it's true keep going, if not, stop.
+   Increase i by 1                              // Final-expression ===> This will happen after each round of loop.
+
+         |
+         |
+         |     RESULT
+         |
+         V
+
+   0 "hey"
+   1 "hey"
+   2 "hey"
+   3 -- This when the loop will stop because we want i < 3"
+
+         |
+         |
+         |     SYNTAX
+         |
+         V
+   
+   for (Initialization; Condition; Final-expression) {
+      console.log("hey");
+   } 
+         |
+         |
+         |
+         |
+         V 
+   
+   for (var i = 0; i < 3; i++) {
+      console.log("hey");
+   }
+
+
+🔅 We can make loop's condition dynamic by giving property .length
+                                                            -------
+                                                               |
+                                                               |
+                                                               |
+                                                               V
+                                    tells how many items are in the array when we have no idea
+
+✨ When we put the dynamic property .length, however we modify the variable, the amount of array will follow.
+
+
+
+🔅 var todoList = {
+	todos: [],
+	displayTodos: function() {
+		console.log('I need to: ', this.todos);
+		for (let i = 0; i < this.todos.length; i++) {
+			this.todos[i] ---> to access specific item in an array. In a loop, it will be equal to each item in the array. 
+		}
+	},
+      
