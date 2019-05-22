@@ -33,3 +33,4 @@ var todoList = {
 todoList.displayTodos();
 todoList.addTodo('boolean testing');
 todoList.toggleCompleted(0);
+
