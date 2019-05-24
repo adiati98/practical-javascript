@@ -1,0 +1,67 @@
+1️⃣ We want to make toggleAll: 
+      If everything is true, make everything false
+
+🔅 Steps:
+
+1. Find if everything is true by counting the todos that have been completed.
+
+     if completedTodos === totalTodos ---> true
+
+
+
+2. Make everything false. But before hand, we have to create variable for completedTodos and totalTodos, because those aren't exist yet.
+
+      var totalTodos = this.todos.length;
+      var completedTodos = 0; -----------------------------> 0 is the safe assumption because we don't know it yet. Then   
+                                                             we go through all the items in todoList to see how many are completed.
+
+
+
+3. Get numbers of completed todos.
+
+      for(var i = 0; i < totalTodos; i++) {                 
+         if (this.todos[i].completed === true) {
+            completedTodos++;
+         }
+      }
+
+   
+   📝 If todos item [i] is completed (true), we want to increase completedTodos by 1. 
+       It will going on until we find all completedTodos.
+
+   📝 The code will go through and fill up the 0 value in var completedTodos = 0.
+       So when there is 1 item completed, it will become completedTodos = 1.
+       When there are 2 items completed, it will become completedTodos = 2, etc. 
+
+
+4. Now we make everything false.
+
+      for(var i = 0; i < totalTodos; i++) {                 
+         this.todos[i].completed = false;
+      }
+      
+
+❗ For this function to run, we have to make sure all todos are completed.
+
+❗ Make sure to include [i] in -- this.todos[i].completed = false -- so that the code run through each item. 
+  Otherwise the code won't run because it doesn't run through the specific (each) items.
+
+
+
+2️⃣ Otherwise, make everything true
+
+🔅 This is following the Case 1️⃣.
+   We just need to create an else statement where when everything is false, make everything true.
+
+🔅 In a scenario where some are true and some are false, everything will become TRUE.
+
+
+
+✨ THINKING IN CODE 
+-----------------------
+
+💬 In this version we need to think in DIFFERENT scenarios in more complex behavior, e.g. when all conditions are true, or all are false, or some are true and some are false. This is what happens in real coding world.
+
+💬 After knowing what people expected from us (how our program should do), do the planning process for example by writing comments out, write different cases to guide us and make things easier in writing the program.
+This also benefit us when we need to re-read our code or for somebody else who reads our code.
+
