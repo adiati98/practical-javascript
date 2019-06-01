@@ -1,0 +1,90 @@
+🔅  HTML is a plain text that gives browser information about the page.
+
+🔅  DOM is what the browser understands and interprets the document to be.
+    In the console, we can see above HTML, there is #document. This #document will interpret the HTML document.
+
+🔅  DOM can interact with objects in HTML, XHTML and XML documents. We can change them with Javascript.
+
+🔅  The node (document, HTML, head, body, etc.) are organized in a tree structure called DOM tree.
+
+      <document>
+         <html>
+            <head>
+               <link>
+               <script></script>          ----------------->  The whole parents/children is called DOM tree.
+            </head>
+            <body>
+               <h1></h1>
+               <p></p>
+            </body>
+         </html>
+      </document>
+
+📝 Document represents DOM.
+
+🔅 To access the Document objects (DOM) in Javascript:
+      In the browser, go to the console and type document. It will show the HTML document.
+
+🔅 We need to place the <script></script> just above the </body> if we want to interact with the page.
+   The reason is that if we place the script tag in the head element, the browser would load it first and thinks that the other elements (body, etc.) are not exist yet.
+
+
+
+
+
+🔅 Clicking a button should run method that linked to it
+---------------------------------------------------------
+
+1.  We want to get access to the button.
+
+   
+   ⚪ Create an id element for button in HTML to be linked with Javascript's variable.
+
+         <button id="displayTodosButton">Display Todos</button>
+
+   
+   ⚪ Create a variable in Javascript file so that we can reference the button to.
+
+      var displayTodosButton = document.getElementById('displayTodosButton')
+          ------------------   -------- --------------  ------------------
+ 
+                  |               |            |                 |
+                  |               |            |                 |
+                  |               |            |                 |
+                  |               |            |                 |
+                  V               V            V                 V
+ 
+           Button in HTML       DOM       Selecting a       Name of id element
+           is referred to               specific element
+          this new variable
+
+
+   ⚪ Check if the code runs in console with:
+
+         console.log(displayTodosButton);
+
+   
+   ❗ We cannot run the code for DOM in node.js. We should run in in client server. Use something like CodePen or Plunker or anything similar. Or open the code in the browser with Live Server extension by VSCode and preview the JS code in the browser's console.
+
+
+2. We want to run the method that is linked to the button when someone clicks the button.
+
+   ⚪ Grab the new variable.
+
+   ⚪ Add eventListener to the variable.
+          -------------
+                
+                |
+                |
+                |
+                |
+                V
+
+   When something happens, we want to do x.
+
+   In other words: When someone DO AN EVENT (clicks, etc.) with the button, it will listen to the event and run the method.
+
+
+   displayTodosBUtton.addEventListener('click', function(){
+      todoList.displayTodos();
+   })   

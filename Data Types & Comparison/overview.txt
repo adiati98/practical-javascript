@@ -1,0 +1,87 @@
+🔅 Javascript Data Types
+-------------------------
+
+⚪ Objects (can be as complex as we want)
+   ⬜ {} ----> todoList, arrays, functions
+
+⚪ Primitives (building blocks) 
+   ⬜ String ----------> "This is a string"
+   ⬜ Numbers ---------> 1, 2, 3, ...
+   ⬜ Boolean ---------> true, false
+   ⬜ Undefined -------> value that hasn't been set
+   ⬜ Null ------------> 'Nothing' / value = 0
+
+
+🔅 Comparison With Primitives       (run this in console)
+------------------------------
+
+⬜ String
+
+   "Jenny" === "Jenny"     // true
+   "Jenny1" === "Jenny"    // false
+
+⬜ Numbers
+
+   1 === 1  // true
+   1 === 2  // false
+
+⬜ Boolean
+
+   true === true     // true
+   true === false    // false
+   false === false   // true
+
+⬜ Undefined & Null
+
+   undefined === undefined      // true
+   null === null                // true
+
+
+🔅 Comparison With Objects
+---------------------------
+
+⬜ {} === {}                // false
+   [1, 2, 3] === [1, 2, 3]  // false
+
+                  |
+                  |
+                  |
+                  |
+                  V 
+
+   The reason is because Javascript look at an object not as how identical it is, but it looks at 
+   are we comparing the same or different object. If we compare the same object, we will get true. 
+   But when we compare different object, even though they are identical, we will get false.
+
+   On examples above, we are creating and comparing two different objects.
+
+                  |
+                  |
+                  |
+                  |
+                  V 
+
+   Analogy :
+
+   🏠 Flora St. 87
+   🏠 Flora St. 88
+   🏠 Flora St. 89
+
+   When we compare this in Javascript, Javascript is not comparing the shape of the houses which are identical, but it compares the addresses (in programming world address is called REFERENCES).
+
+      Flora St. 87 === Flora St. 88     // false 
+
+
+⬜ To compare the same object, we need to set up a variable.
+
+      var houseA = {}
+
+      houseA === houseA    // true
+
+
+🔅 Recap
+---------
+
+⚪ When we compare primitives, we are comparing the VALUE. 
+
+⚪ When we compare objects, we are comparing the REFERENCES (memory addresses) that refer to the value.
