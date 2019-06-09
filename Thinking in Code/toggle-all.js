@@ -5,7 +5,7 @@ var todoList = {
 			console.log('None on the list yet!');
 		} else {
 			console.log('I need to: ');
-			for (let i = 0; i < this.todos.length; i++) {
+			for (var i = 0; i < this.todos.length; i++) {
 				if (this.todos[i].completed === true) {
 					console.log('(x)', this.todos[i].todoText);
 				} else {
@@ -30,17 +30,17 @@ var todoList = {
 		this.displayTodos();
 	},
 	toggleCompleted: function(positionToModify) {
-		let todo = this.todos[positionToModify];
+		var todo = this.todos[positionToModify];
 		todo.completed = !todo.completed;
 		this.displayTodos();
 	},
 	toggleAll: function() {
 		// Recording total and completed numbers of todos.
-		let totalTodos = this.todos.length;
-		let completedTodos = 0;
+		var totalTodos = this.todos.length;
+		var completedTodos = 0;
 
 		// Get numbers of completed todos to count it
-		for (let i = 0; i < totalTodos; i++) {
+		for (var i = 0; i < totalTodos; i++) {
 			if (this.todos[i].completed === true) {
 				completedTodos++;
 			}
@@ -48,12 +48,12 @@ var todoList = {
 
 		// Case 1: If everything is true, make everything false
 		if (completedTodos === totalTodos) {
-			for (let i = 0; i < totalTodos; i++) {
+			for (var i = 0; i < totalTodos; i++) {
 				this.todos[i].completed = false;
 			}
 			// Case 2: Otherwise, make everything true
 		} else {
-			for (let i = 0; i < totalTodos; i++) {
+			for (var i = 0; i < totalTodos; i++) {
 				this.todos[i].completed = true;
 			}
 		}

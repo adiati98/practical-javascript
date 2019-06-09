@@ -5,7 +5,7 @@ var todoList = {
 			console.log('None on the list yet!');
 		} else {
 			console.log('I need to: ');
-			for (let i = 0; i < this.todos.length; i++) {
+			for (var i = 0; i < this.todos.length; i++) {
 				if (this.todos[i].completed === true) {
 					console.log('(x)', this.todos[i].todoText);
 				} else {
@@ -30,7 +30,7 @@ var todoList = {
 		this.displayTodos();
 	},
 	toggleCompleted: function(positionToModify) {
-		let todo = this.todos[positionToModify];
+		var todo = this.todos[positionToModify];
 		todo.completed = !todo.completed;
 		this.displayTodos();
 	}

@@ -5,7 +5,7 @@ var todoList = {
 			console.log('None on the list yet!');
 		} else {
 			console.log('I need to: ');
-			for (let i = 0; i < this.todos.length; i++) {
+			for (var i = 0; i < this.todos.length; i++) {
 				if (this.todos[i].completed === true) {
 					console.log('(x)', this.todos[i].todoText);
 				} else {
@@ -30,26 +30,26 @@ var todoList = {
 		this.displayTodos();
 	},
 	toggleCompleted: function(positionToModify) {
-		let todo = this.todos[positionToModify];
+		var todo = this.todos[positionToModify];
 		todo.completed = !todo.completed;
 		this.displayTodos();
 	},
 	toggleAll: function() {
-		let totalTodos = this.todos.length;
-		let completedTodos = 0;
+		var totalTodos = this.todos.length;
+		var completedTodos = 0;
 
-		for (let i = 0; i < totalTodos; i++) {
+		for (var i = 0; i < totalTodos; i++) {
 			if (this.todos[i].completed === true) {
 				completedTodos++;
 			}
 		}
 
 		if (completedTodos === totalTodos) {
-			for (let i = 0; i < totalTodos; i++) {
+			for (var i = 0; i < totalTodos; i++) {
 				this.todos[i].completed = false;
 			}
 		} else {
-			for (let i = 0; i < totalTodos; i++) {
+			for (var i = 0; i < totalTodos; i++) {
 				this.todos[i].completed = true;
 			}
 		}
@@ -57,7 +57,8 @@ var todoList = {
 	}
 };
 
-// VERSION 7
+// 1. Clicking “Display todos” button should run todoList.displayTodos
+// 2. Clicking “Toggle all” button should run todoList.toggleAll
 
 var displayTodosButton = document.getElementById('displayTodosButton');
 var toggleAllButton = document.getElementById('toggleAllButton');
