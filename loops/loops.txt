@@ -41,7 +41,9 @@
                                                                |
                                                                |
                                                                V
-                                    tells how many items are in the array when we have no idea
+                                                      tells how many items 
+                                                      there are in the array 
+                                                      when we have no idea
 
 ✨ When we put the dynamic property .length, however we modify the variable, the amount of array will follow.
 

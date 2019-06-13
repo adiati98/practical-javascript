@@ -67,6 +67,6 @@ displayTodosButton.addEventListener('click', function() {
 	todoList.displayTodos();
 });
 
-toggleAllButton.addEventListener('click', function(params) {
+toggleAllButton.addEventListener('click', function() {
 	todoList.toggleAll();
 });
