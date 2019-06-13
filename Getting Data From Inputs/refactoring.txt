@@ -1,0 +1,185 @@
+
+🔅 Refactoring (restructuring existing code) goal is to make the code more readable, easier to understand and a bit neater, while the functions remain the same.
+
+
+🔅 Refactoring our DOM for displayTodos and toggleAll 
+------------------------------------------------------
+
+
+◻ Onclick is the same with addEventListener('click'), which means when we click something, the function that   
+  bounded with this in Javascript will run. 
+
+◻ We use var name handlers for objects here because we want the method to handle different objects/events.
+
+◻ handlers.displayTodos()
+   -------  -------------
+      |           |
+      |           |
+      |           |
+      V           V 
+  
+  Object's     method to be run
+    name
+
+◻ Not every code can be refactored. And if it so, it's fine as long as it works. But when we see that it can be refactored, it would be better to refactor it.
+
+
+
+
+🔅 Before & After Refactoring
+------------------------------
+
+
+HTML
+-----
+
+🔲 BEFORE
+
+  <button id="displayTodosButton">Display Todos</button>
+  <button id="toggleAllButton">Toggle All</button>
+
+🔲 AFTER
+
+  <button onclick="handlers.displayTodos()">Display Todos</button>
+  <button onclick="handlers.toggleAll()">Toggle All</button>
+
+
+
+JAVASCRIPT
+-----------
+
+🔲 BEFORE
+
+  var displayTodosButton = document.getElementById('displayTodosButton');
+  var toggleAllButton = document.getElementById('toggleAllButton');
+
+  displayTodosButton.addEventListener('click', function() {
+    todoList.displayTodos();
+  });
+
+  toggleAllButton.addEventListener('click', function() {
+    todoList.toggleAll();
+  });
+
+
+🔲 AFTER
+
+  var handlers = {
+    displayTodos: function() {
+      todoList.displayTodos();
+    },
+    toggleAll: function() {
+      todoList.toggleAll();
+    }
+  };
+
+
+
+
+🔅 Click add button for adding todos
+------------------------------------
+
+◻ addTodo needs to have an input text to write the addition and a button to submit in HTML.
+
+◻ The method for addTodo:  
+
+addTodo: function() {
+		var addTodoTextInput = document.getElementById('addTodoTextInput');
+		todoList.addTodo(addTodoTextInput.value);
+		addTodoTextInput.value = '';
+	},
+
+
+
+    🗒 var addTodoTextInput = document.getElementById('addTodoTextInput');  // Linked with DOM HTML
+          -----------------   -----------------------  ----------------
+                  |                      |                     | 
+                  |                      |                     |
+                  |                      |                     |
+                  |                      |                     |
+                  V                      V                     V 
+        New var to be accessed     choose specific      id name of input
+          by input in HTML        element in DOM HTML        in HTML
+
+
+
+    ◻ todoList.addTodo(addTodoTextInput.value);
+                      -----------------------                 
+                       argument as in todoList 
+                      addTodo: function(todoText)
+                                        --------
+                                            |
+                                            |
+                                            |
+                                            |
+                                            V
+                              🗒 (addTodoTextInput.value)
+                                  ---------------  -----
+                                        |            |
+                                        |            |
+                                        |            |
+                                        V            V
+                              comes from new      grab the value of 
+                                var in DOM        whatever is typed to the input.
+                                                  Value will always be a STRING.
+
+
+
+◻ addTodoTextInput.value = ''; 
+    ------> This will clear the input after a value is passed and button is clicked.
+
+
+
+🔅 Click change button for changing todos
+------------------------------------------
+
+◻ HTML for changeTodo:
+
+<div>
+    <input id="changeTodoPositionInput" type="number">
+    <input id="changeTodoTextInput" type="text">
+    <button onclick="handlers.changeTodo()">Change Todo</button>
+</div>
+
+
+◻ Javascript method for changeTodo:
+
+	changeTodo: function() {
+		var changeTodoPositionInput = document.getElementById(
+			'changeTodoPositionInput'
+		);
+		var changeTodoTextInput = document.getElementById('changeTodoTextInput');
+		todoList.changeTodo(
+			changeTodoPositionInput.valueAsNumber,
+			changeTodoTextInput.value
+		);
+		changeTodoPositionInput.value = '';
+		changeTodoTextInput.value = '';
+	},
+
+
+    🗒 There are 2 inputs in changeTodo: position of item to be changed and change to what (todoText)
+
+    🗒 The position of item to be changed is number. So we have to grab the value with valueAsNumber within 
+       the function. Otherwise it would be grabbed as string.
+
+
+🔅 Last Notes
+--------------
+
+◻ We move toggleAll function within handler object to the bottom so it has the same order with toggleAll function within 
+  todoList object.
+
+◻ In this chapter we can see more clearly how we can make our code neat by grouping things in <div> in HTML and objects in 
+  Javascript.
+
+    🗒 HTML
+    --------
+       ⚪ displayTodos and toggleAll are in the same <div> because they don't require input tag.
+       ⚪ We put there rest in different <div> because they require a button and input tag(s).
+
+    🗒 Javascript
+    -------------
+        ⚪ Using object is an effective way to organize our code.
+           todoList object to group the codes that run the functions, handlers object to group the codes that related to user interface.  
+

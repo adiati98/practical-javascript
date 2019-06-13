@@ -1,0 +1,33 @@
+🔅 There are times when the code that we run doesn't behave as expected. This is called bug.
+
+🔅 To check the code line by line and find the bug, we use debugger.
+   It will pause the program as it runs.
+
+🔅 To debug, we just have to type 'debugger' before the codes that we want to inspect and under the 
+	 method, then we call the method in the console.
+
+🔅 Click 'Step over next function' button on top.
+   When we hover over a value, we can see what they are.
+
+🔅 When we done with debugging, delete the debugger.
+
+🔅 When we have a function within function, we can click the down arrow to step into the function.
+   It will bring us to the function.
+
+   e.g.: 
+   
+   addTodo: function(todoText) {
+			debugger;
+			this.todos.push({
+				todoText: todoText,
+				completed: false
+			});
+			this.displayTodos();
+	},
+
+   When we hover on this.displayTodos(), click the down arrow, then it will bring us to the displayTodos() function.
+
+🔅 With debugger we can see the process on how our code runs step by step.
+
+🔅 Debugger is the most important tools because it helps solving problem faster. We can easily spot 
+	 the issues with it. It also helps to understand our code, even though when it works.

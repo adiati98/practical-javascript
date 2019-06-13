@@ -1,0 +1,236 @@
+🔅 Inserting <li> elements into the DOM 
+----------------------------------------
+
+
+⚪ Create a <ul> inside HTML file, without <li>.
+    We will add <li> later with Javascript, depends on user need.
+
+⚪ To create <li> dynamically with Javascript:
+
+      var todoLi = document.createElement('li');
+                                          ----
+                                            |
+                                            |
+                                            |
+                                            V 
+                                  The kind of element that we want to create.
+
+
+⚪ To create <ul> so that we could insert our <li> later on:
+
+      var todosUl = document.querySelector('ul')
+                             ------------- ----
+                                   |        |
+                                   |        |
+                                   |        |
+                                   |        V 
+                                   |   Element's type
+                                   |
+                                   |
+                                   V 
+                          Allows to add query
+                        or search term and find 
+                         the first element that 
+                           matches the query. 
+                                
+
+⚪ To insert <li> into <ul> ----> insert child to its parents element = appendChild:
+
+      todosUl.appendChild(todoLi);
+
+
+
+
+🔅 Make our code be seen by user by display it on screen
+---------------------------------------------------------
+
+⚪ Take todos array and display it to the screen.
+
+   ◻ Make new var (view) that contains empty object which responsible for what user sees (displayTodo). It doesn't change anything, only renders the data to the screen. 
+   
+   ◻ Create a displayTodo method with codes above.
+
+
+   var view = {
+	displayTodos: function() {
+		var todosUl = document.querySelector('ul');
+		var todoLi = document.createElement('li');
+		todosUl.appendChild(todoLi);
+	}
+   };
+
+   ◻ Call the function in console:
+
+      view.displayTodos();
+
+
+
+🔅 There should be an <li> element for every todo
+--------------------------------------------------
+
+⚪ Above code only run 1 time. We want it to run (display)   each item in our todos. Therefore we use for loop and    wrap above code in the loop.
+
+
+   var view = {
+	displayTodos: function() {
+	  for (var i = 0; i < todoList.todos.length; i++) {
+	    var todosUl = document.querySelector('ul');
+	    var todoLi = document.createElement('li');
+	    todosUl.appendChild(todoLi);
+	  }
+	}
+   };
+
+
+   ❗ Up until here, when we test it by add some todos 
+     and call our method several times --- view.displayTodos(); --- it will multiply the addTodo, eventhough we're not adding anything new. 
+     
+     What we want is after we call the method, it will clear up and start again from 0.  
+
+     To do this:
+
+     1️⃣ Move var todosUl = document.querySelector('ul');   to above loop (outside for loop).
+        ➡ This will make sure that we have 0 item in <ul> and new <ul> will not be created in the for loop.
+
+     2️⃣ Grab innerHTML property, in our case whatever 
+         HTML inside <ul> (todosUl), and set it to nothing ('').
+         ➡ This will clear out <ul> before it starts adding new <li> elements.
+
+         
+      var view = {
+	      displayTodos: function() {
+         1️⃣ var todosUl = document.querySelector('ul');
+         2️⃣ todosUl.innerHTML = '';
+            for (var i = 0; i < todoList.todos.length; i++) {
+            var todoLi = document.createElement('li');
+            todosUl.appendChild(todoLi);
+	         }
+	      }
+      };
+
+
+
+🔅 Each <li> should contain .todoText
+--------------------------------------
+
+     
+  👩‍💻 todoLi.textContent = todoList.todos[i].todoText;
+      ------------------   ---------------------------
+          Change this            To this value
+
+
+
+   📝 todoLi.textContent = todoList.todos[i].todoText;
+             ------------   ----------------  --------
+                  |                |             |
+                  |                |             |      
+                  |                |             V 
+                  V                |          in this
+                                   V          property
+            Change text       Each todo that
+         content of element   will be changed
+
+   ________________________________________________________
+ 
+                              |
+                              |
+                              |
+                              |
+                              V 
+
+🗣 It takes todoLi element and accessing todoLi element's textContent property and setting it to the todoText property of each of todo objects inside of todos array.
+
+
+
+
+🔅 Each <li> element should show .completed
+--------------------------------------------
+
+⚪ Steps :
+
+    1. We want every completed todo to show this string:
+
+          👩‍💻 '(x) textTodo'
+    
+    2. Create new var to store no.1, which will change depends 
+       on true or false.
+       We create it with empty string first because it will change value later in if statement.
+
+          👩‍💻 var todoTextWithCompletion = '';
+
+    3. Create if statement
+
+          👩‍💻 if(todo.completed === true) {
+                (x) textTodo;
+              } else {
+                ( ) textTodo;
+              }
+
+    4. Create new var to safe us time from typing.
+
+          👩‍💻 var todo = todoList.todos[i]
+
+    5. Change the todoLi to todoTextWithCompletion
+
+          👩‍💻 todoLi.textContent = todoTextWithCompletion;
+
+
+      📝 Above line is replacing:
+
+          👩‍💻 todoLi.textContent = todoList.todos[i].todoText;
+
+          Because this code only shows the todoText without completion. While we need to show todoText with completion.
+       
+
+🔅 Escaping the Console
+------------------------
+
+⚪ Make everything's shown on HTML page
+
+⚪ What to consider and to be done:
+      
+   1. We want methods to be shown in the page and not 
+      only on Console.
+      
+      
+   2. Value will change and can be shown after we 
+      click a button.
+      Based on this, the right place to run view.displayTodos() would be at the end of each handlers. 
+
+   3. We no longer need displayTodo that only can be 
+      opened in console when everything's can be shown on page.
+
+
+   🚮 In HTML:
+   
+      <button onclick="handlers.displayTodos()">Display Todos</button> 
+
+   🚮 In handlers:
+
+      displayTodos: function() {
+		todoList.displayTodos();
+	   }, 
+
+   🚮 At the end of every todoList object's property:
+
+       this.displayTodos();
+
+   🚮 The first displayTodos property in todoList object.
+
+      displayTodos: function() {
+         if (this.todos.length === 0) {
+            console.log('None on the list yet!');
+         } else {
+            console.log('I need to: ');
+            for (var i = 0; i < this.todos.length; i++) {
+               if (this.todos[i].completed === true) {
+                  console.log('(x)', this.todos[i].todoText);
+               } else {
+                  console.log('( )', this.todos[i].todoText);
+               }
+            }
+         }
+	   },
+
+      📝 Above code has same structure with displayTodos method in var view, which we already 
+         updated to have text with completion. That's why we don't need it anymore.   

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Escape From The Console</title>
+</head>
+
+<body>
+  <h1>Todo List</h1>
+  <h3><em>Refactoring Section</em></h3>
+
+  <div>
+    <button onclick="handlers.toggleAll()">Toggle All</button>
+  </div>
+
+  <div>
+    <input type="text" name="addTodo" id="addTodoTextInput">
+    <button onclick="handlers.addTodo()">Add</button>
+  </div>
+
+  <div>
+    <input id="changeTodoPositionInput" type="number">
+    <input id="changeTodoTextInput" type="text">
+    <button onclick="handlers.changeTodo()">Change Todo</button>
+  </div>
+
+  <div>
+    <input id="deleteTodoPositionInput" type="number">
+    <button onclick="handlers.deleteTodo()">Delete</button>
+  </div>
+
+  <div>
+    <input id="toggleCompletedPositionInput" type="number">
+    <button onclick="handlers.toggleCompleted()">Completed</button>
+  </div>
+
+  <ul>
+
+  </ul>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
