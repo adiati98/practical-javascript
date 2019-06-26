@@ -1,0 +1,183 @@
+📌 runWithDebugger
+-------------------
+
+🔅 When we want to debug something in the Chrome's console, we can do:
+
+   1. Create the function
+   2. Write "debugger;" in the console.
+   3. Call the function & hit enter.
+   4. Click next arrow, then when it's on the function, click the down arrow to step into the function for debugging. 
+
+
+🔅 We can create a shortcut for running the debugger so we don't have to run it manually each time.
+
+   ⚪ Create a function:
+
+        runWithDebugger(ourFunction);
+      
+            📝 What we want this function to do is:
+                  1. Run the debugger.
+                  2. Step into the our function that we want to debug.
+
+
+                  
+
+    👩‍💻 1️⃣ function runWithDebugger(ourFunction) {
+              debugger;
+              ourFunction();
+           }
+
+        2️⃣ runWithDebugger(function logTenNumbers() {
+	            for (var i = 0; i < 10; i++) {
+		            console.log(i);
+	            }
+            })
+    
+
+🔅 runWithDebugger is a function that enhances other function. This function is so powerful because 
+   it can manipulate other function.
+
+🔅 From we here we can see that a function can be passed into other function.
+
+
+
+📌 setTimeout
+--------------
+
+🔅 setTimeout() calls a function or evaluates an expression after a specified number of time in 
+   milliseconds. It basically enhances the function inside setTimeout() function, and set it into some sort of alarm clock.
+
+🔅 Syntax:
+
+      setTimeout(function() {
+         return x;
+      }, time in ms.)
+
+
+
+📌 forEach
+-----------
+
+🔅 .forEach() is to run every single item in array. It's shorter than for loop.
+    It's handling the for loop for us.
+
+
+🔅 There are several ways to do .forEach():
+
+   ✏  Create a variable with an array as value.
+
+            var students = ['Jonathan', 'Jenny', 'Jerry'];
+
+            
+    1.  Create function and insert function name in .forEach() to call it.
+
+            function logName(name) {
+               console.log(name);
+            }
+
+            students.forEach(logName);
+
+    
+    2.  Pass in the function to .forEach()
+
+            students.forEach(function logName(name) {
+               console.log(name);
+            })
+
+
+    3.  Create an unnamed function inside .forEach()
+
+            students.forEach(function(name) {
+               console.log(name);
+            })
+
+
+❗ Breaking down how forEach works by create forEach function from scratch:
+
+            function forEach(myArray, myFunction) {
+               for(var i = 0; i < myArray.length; i++) {
+                  myFunction(myArray[i]);
+               }              
+            }
+
+      📝 What we want to do is for forEach function to run myFunction on every element in myArray.
+
+      📝 Then create a variable and try to run our function (---> example: car):
+
+            var japaneseCars = ["Toyota", "Nissan", "Honda"];
+
+            forEach(japaneseCars, function(car) {
+               console.log(car);
+            });
+
+
+
+📌 addEventListener     ------> Run this directly in Chrome's console
+--------------------
+
+🔅 An example of function inside of addEventListener function.
+
+      1. Open a website and inspect an element (e.g.: <h1>).
+      2. In the console, the element that we selected will be referenced by a $0 sign.
+            (e.g.: <h1>HTML: A good basis for accessibility</h1> == $0)
+      3. We can confirm this by running $0 in Chrome's console.
+
+
+      Next step:
+      
+      4. Create a variable that store the $0.
+            (e.g.: var titleElement = $0;)
+
+
+      Next we will handle elements in DOM with addEventListener(). Event's example is 'click' :
+      
+      5. titleElement.addEventListener('click', function() {
+            console.log('The title was clicked!');
+         });
+
+         📝 The behavior would be: 
+             the addEventListener will listen that when we do 'click' event on titleElement, our function will run.
+      
+
+      6. To check that the function works, click on the titleElement in the page and inspect in console.
+
+
+
+      📝 addEventListener will run our function. And when our function runs, it will pass in the event's object 
+        (console.log in our example). But we can choose to ignore the event object.
+
+         e.g.:    titleElement.addEventListener('click', function(event) {
+                     console.log(event);
+                  });
+
+         ( 🗒 Replace step 5 with above function)
+
+         This will open the information about the click event.
+
+
+      📝 To combine our function and information above:
+
+            titleElement.addEventListener('click', function(event) {
+               console.log(event);
+               console.log('The title was clicked!');
+            });
+
+
+📌 Buzzwords: Higher order functions and callback functions
+------------------------------------------------------------
+
+🔅 Higher order functions:
+      ◽ Functions that accept other functions
+      ◽ Enhance the behavior of other function
+
+   ✏ e.g.: runWithDebugger, forEach, addEventListener, etc.
+
+🔅 Callback functions:
+      ◽ The functions that are passed into higher order functions
+
+   ✏ e.g.: Functions that are passed into higher order functions e.g. above. 
+
+
+
+
+         
