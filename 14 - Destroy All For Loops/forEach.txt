@@ -1,0 +1,197 @@
+🔅 In this section we will replace all for loops into forEach.
+
+⚪ toggleAll method in todoList object
+---------------------------------------
+
+✏ Original code:
+
+  toggleAll: function() {
+		var totalTodos = this.todos.length;
+		var completedTodos = 0;
+
+		for (var i = 0; i < totalTodos; i++) {
+			if (this.todos[i].completed === true) {
+				completedTodos++;
+			}
+		}
+
+		if (completedTodos === totalTodos) {
+			for (var i = 0; i < totalTodos; i++) {
+				this.todos[i].completed = false;
+			}
+		} else {
+			for (var i = 0; i < totalTodos; i++) {
+				this.todos[i].completed = true;
+			}
+		}
+	}
+
+
+
+✏  First for loop:
+
+    for (var i = 0; i < totalTodos; i++) {
+			if (this.todos[i].completed === true) {
+				completedTodos++;
+			}
+		}
+
+    📝 We want to loop through each item and get number of completed todos.
+
+
+          Array            Items that we want to iterate. 
+            ^         We can name the parameter anyway we want.
+            |                         ^
+            |                         |
+            |                         |             
+        ----------                  ----  
+        this.todos.forEach(function(todo) {
+          if (todo.completed) === true {
+            completedTodos++;
+          }
+        });
+
+
+
+
+  📌 The whole for loops (3 parts) that we replace with forEach:
+
+    toggleAll: function() {
+      var totalTodos = this.todos.length;
+      var completedTodos = 0;
+
+      this.todos.forEach(function(todo) {
+        if (todo.completed === true) {
+          completedTodos++;
+        }
+      });
+
+  ⭐	if (completedTodos === totalTodos) {
+        this.todos.forEach(function(todo) {
+          todo.completed = false;
+        });
+      } else {
+        this.todo.forEach(function(todo) {
+          todo.completed = true;
+        });
+      }
+    };
+
+
+
+✏ Optimization of forEach to toggle all todos to false / true from 2 parts compress into 1 part.
+
+   ⭐ this.todos.forEach(function(todo) {
+        if (completedTodos === totalTodos) {
+          todo.completed = false;
+        } else {
+          todo.completed = true;
+        }
+      });
+
+
+
+✏ Test if the code runs:
+
+   Case 1:
+   -------
+   1. Add several todos.
+   2. Click toggleAll and see if everything's tick. If so, then it runs.
+
+   Case 2:
+   -------
+   1. Add several todos.
+   2. Toggle one todo (completed button) and leave the rest.
+   3. Click toggleAll. If everything's become true then the code runs.
+
+
+
+
+⚪ displayTodos method in view object
+--------------------------------------
+
+✏ Original code:
+
+  var view = {
+    displayTodos: function() {
+      var todosUl = document.querySelector('ul');
+      todosUl.innerHTML = '';
+
+  1️⃣  for (var i = 0; i < todoList.todos.length; i++) {
+        var todoLi = document.createElement('li');
+  ❌    var todo = todoList.todos[i];
+        var todoTextWithCompletion = '';
+
+        if (todo.completed === true) {
+          todoTextWithCompletion = '(x) ' + todo.todoText;
+        } else {
+          todoTextWithCompletion = '( ) ' + todo.todoText;
+        }
+
+  2️⃣   todoLi.id = i;
+        todoLi.textContent = todoTextWithCompletion;
+  3️⃣   todoLi.appendChild(this.createDeleteButton());
+        todosUl.appendChild(todoLi);
+      }
+    },
+
+
+📌 After replace with forEach
+
+  var view = {
+    displayTodos: function() {
+      var todosUl = document.querySelector('ul');
+      todosUl.innerHTML = '';
+
+  1️⃣  todoList.todos.forEach(function(todo, position) {
+        var todoLi = document.createElement('li');
+        var todoTextWithCompletion = '';
+
+        if (todo.completed === true) {
+          todoTextWithCompletion = '(x) ' + todo.todoText;
+        } else {
+          todoTextWithCompletion = '( ) ' + todo.todoText;
+       }
+
+    2️⃣ todoLi.id = position;
+        todoLi.textContent = todoTextWithCompletion;
+    3️⃣ todoLi.appendChild(this.createDeleteButton());
+        todosUl.appendChild(todoLi);
+    4️⃣ }, this);
+    },
+
+----------------------------------------------------------------------------------------------------
+|    ➡ Refer to documentation in https://developer.mozilla.org/id/docs/Web/JavaScript/Reference/  |
+|       Global_Objects/Array/forEach                                                               ||                                                                                                  |
+|       The forEach() method syntax:                                                               |
+|                                                                                                  |
+|         arr.forEach(function callback(currentValue[, index[, array]]) {                          |
+|         //your iterator                                                                          |
+|         }[, thisArg]);                                                                           |
+----------------------------------------------------------------------------------------------------
+
+1️⃣ Replace for loop with forEach, pass in currentValue (todo) and index (position) as arguments. 
+
+2️⃣ Replace i with position, which is referring to the argument.
+
+3️⃣ 'this' refers to the callback function (not a method), which runs by forEach() method. So it's not equal to view object.
+
+4️⃣ We want 'this' within the callback function to be equal to view object. To achieve this, we pass in thisArg (this) as argument in forEach. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
