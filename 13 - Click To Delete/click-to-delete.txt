@@ -1,0 +1,232 @@
+📌 The 'return' statement
+--------------------------
+
+🔅 We need to return the value of a function. If we don't, it will return as 'undefined'.
+
+    e.g.: We want a variable to be equal to the value of a function.
+
+              var productOf2And10 = multiplyTwoNumbers(2, 10);
+
+          So what we should do is to 'return' the value in multiplyTwoNumbers function:
+
+              function multiplyTwoNumbers(a, b) {
+                var result = a * b;
+                return result;
+              }
+
+              var productOf2And10 = multiplyTwoNumbers(2, 10);
+
+
+
+📌 Requirements
+----------------
+
+🔅 There should be a way to create delete buttons
+--------------------------------------------------
+
+  ✏ Create a DOM element for deleting by creating deleteButton function inside view object.
+  
+
+  ✏ We want to create a variable called deleteButton. And we want this button to be an 'actual' button and at the end we want this function to return the deleteButton.
+  
+
+  ✏ deleteButton should be equal to new button element. Therefore we create new element in DOM with:
+
+    var deleteButton = document.createElement('button');
+
+  This will create a button element that doesn't exist before.
+  
+
+  ✏ Create text element to the button so user know what it is:
+
+    deleteButton.textContent = 'Delete';
+    
+
+  ✏ We need a way to access these different delete elements. So we create class element to identify these different delete elements.
+
+    deleteButton.className = 'deleteButton';
+
+  ✏ Then we return the deleteButton.
+
+    return deleteButton;
+
+  ✏ Check if the function runs:
+      
+    view.createDeleteButton();
+
+
+  
+🔅 There should be a delete button for each todo (show the delete buttons)
+-------------------------------------------------
+
+  ✏ Because we want to make the delete APPEAR on page, we will create function in the displayTodos method together with other DOM manipulation.
+
+    todoLi.appendChild(this.createDeleteButton());
+    ------ ----------- -------------------------
+      ^
+      |    Will be added             |
+      |________ to                   |
+                ^                    |
+                |                    v 
+                |      It will return the deleteButton
+                |         that will be passed into
+                |                    |
+                |                    | 
+                |____________________|          
+
+
+  📝 We are adding a child to todoLi and we passing in  
+  new deleteButton which creates by this.createDeleteButton()
+
+  📝 We use 'this' in this.createDeleteButton() because conveniantly we have the createDeleteButton available on the same object.
+
+
+
+ 🔅 Each li should have an id that has the todo position
+ --------------------------------------------------------
+ 
+  ✏ Because we're not telling the app which position that we want to delete anymore, we need to store the information's in todoLi to embed it into HTML.
+
+      todoLi.id = i;
+
+    This will work because the displayTodos will iterate over every item in our todos.
+
+
+  ✏ We use id instead of class because every element needs to have one unique id.
+
+  ✏ Check this with console. Add some todos and inspect the HTML of the todo. It should have an id by now.
+
+
+  
+🔅 Delete buttons should have access to the todo id
+----------------------------------------------------
+
+✏ If we create the access of delete buttons within createDeleteButton method, it will be problematic because we then have to create addEventListener to every single todo item, which eventually create memory problems. So we will turn all the stuffs into single event listener.
+
+    ⭕ All <li> with deleteButton is inside <ul>. Therefore, instead of adding addEventListener to each <li>, we will create a single addEventListener with the <ul>.
+
+    ⭕ The strategy is when <li> inside <ul> is clicked, we will use that information to delete the correct one.
+
+            var todosUl = document.querySelector('ul');
+
+            todosUl.addEventListener('click', function(clickedLiInsideUl) {
+              console.log(clickedLiInsideUl);
+            });
+
+        📝 When we console.log(clickedLiInsideUl), we will get a bunch of information's. One of them is 
+        target: button.deleteButton.
+        Target tells us which item we actually click on.
+
+        📝 deleteButton doesn't have the id's (that we will grab to delete) on them. The id's are on <li> elements, which are one level above.
+        So we will access this using the parentNode property. We can check this in the console by expanding the target's tab.
+
+
+            todosUl.addEventListener('click', function(clickedLiInsideUl) {
+	            console.log(clickedLiInsideUl.target.parentNode.id);
+            });
+
+            📝 The console is read as:
+            1. Get the function that we want to listen ---> clickedLiInsideUl
+            2. Get the target ---> item that is clicked
+            3. Go up one level and get the <li> item that the deleteButton is inside of  ---> access it with parentNode.
+            4. Access the id.
+
+
+
+🔅 Clicking delete should update todoList.todos and the DOM
+------------------------------------------------------------
+
+✏ Steps to do:
+
+1. Get the element that was clicked on.
+
+      var elementClicked = clickedLiInsideUl.target;
+
+
+2. a) Check if elementClicked is delete button.
+
+          if (elementClicked.className === 'deleteButton')
+
+   b) Inside the if statement we want to run handlers.deleteTodo(position)
+
+   c) Get the position (id of the <li> element):
+          
+          elementClicked.parentNode.id
+        
+                      |
+                      |
+                      V 
+          
+      This is a string. But delete handler needs a number as position.
+      So we should use parseInt() to turn strings into number.
+
+                      |
+                      |
+                      V 
+
+          parseInt(elementClicked.parentNode.id);
+
+    d) Back to point b, now we pass point c as parameter in the function.
+
+          handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+
+                      |
+                      |
+                      V 
+
+      Final code:
+
+          if (elementClicked.className === 'deleteButton') {
+            handlers.deleteTodo(parseInt(elementClicked.parentNode.id));
+          }
+
+
+    📝 In this version we already have delete button for each todos. Therefore, we delete the original input and delete button.
+
+     ⭕ Deleted codes:
+      
+      - Line 62: 
+          var deleteTodoPositionInput = document.getElementById('deleteTodoPositionInput');
+      
+      - Line 64, because we don't need to reset the value:
+          deleteTodoPositionInput.value = '';
+
+      ⭕ Change code, because we don't have deleteTodoPositionInput anymore we will explicitly pass in the position :
+
+      - Line 61, from: 
+          deleteTodo: function() {
+
+        to: 
+          deleteTodo: function(position) {
+
+      - Line 63, from: 
+          todoList.deleteTodo(deleteTodoPositionInput.valueAsNumber);
+        
+        to:
+          todoList.deleteTodo(position);
+
+
+3. Refactoring the code by put this code inside view object. The reason is because we created onclick = handlers. _______ for all inputs inside HTML. So this code is also some sort of HTML view.
+
+    ✏ Create a new method called setUpEventListeners ---> Eventually we will use the function for many event listeners and not just for delete. 
+
+    ❗ DON'T FORGET to call the method, otherwise the code won't run!
+
+
+
+🔅 Cleanup
+------------
+
+✏ We don't need the HTMl input and button for deleteTodo anymore. So we should delete the whole <div> of deleteTodoPositionInput.
+
+
+📌 setUpEventListeners is called EVENT DELEGATION.
+                                 ------------------
+                                         |
+                                         |
+                                         |
+                                         V 
+          Allows you to avoid adding event listeners to specific nodes;  instead, the event listener is added (delegated) to one parent.
+
+
+
