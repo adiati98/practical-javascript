@@ -1,0 +1,134 @@
+🔅 There is a cheatsheet source that is provided by Gordon Zhu:
+
+    https://github.com/gordonmzhu/cheatsheet-js
+
+
+📝 Case 1: In a regular function (or if you're not in a function at all), "this" points to window.
+This is the default case. 
+
+    ✨ Window is an object in Javascript that represents browser's window.
+
+    ✨ Try in console: 
+
+        1. window
+
+        2. this
+
+        3. function logThis() {
+            console.log(this);
+           }
+
+           logThis();
+
+        Any of above will open the window object.
+
+
+
+📝 Case 2: When a function is called as a method, "this" points to the object that's on the left side of the dot.
+
+        var myObject = {
+          myMethod: function() {
+              console.log(this);
+          }
+          };
+
+        myObject.myMethod();
+        --------
+            |
+            |
+            V 
+     "this" referring 
+          here
+
+
+
+📝 Case 3: In a function that's being called as a constructor, "this" points to the object that the constructor is creating.
+
+    📌 Reference: https://css-tricks.com/understanding-javascript-constructors/
+
+    ✨ Constructors are like regular functions, but we use them with the "new" keyword.
+
+    ✨ A constructor is useful when you want to create multiple similar objects with the same properties and methods.
+
+    ✨ When a coder intended for a function to be a constructor, they capitalized the name of the function.
+
+    ✨ Constructor is to creating a new object. Every constructor starts with a new fresh object.
+
+
+
+    function Person(name) {
+      // this = {}  -------------> At the very beginning the constructor creates a new object.
+      this.name = name;                                                             ^
+      // return this ------------> At the very end, "this" will return.             |              
+    }                                                                               |
+                                                        ^                           |
+    new Person('Ayu');                                  |    These will happen      |
+   -----                                                |   automatically in the    |
+     |                                                  |       background.         |
+     |                                                  |                           |
+     V                                                  |                           |
+    When we call the function with "new" --------------------------------------------
+
+
+    
+    ☕ How it works:
+
+        1. With "new" keyword, "this" will automatically create a new object.
+                this = {}
+
+        2. Then we attach name property, so it will have name property.
+                {name: } 
+
+        3. Then if we call Ayu, then the name will be equal to Ayu because the variable name matches with the argument and it will return the object.
+                {name: 'Ayu'} 
+
+
+
+📝 Case 4: When you explicitly set the value of "this" manually using "bind", "apply", or "call", it's all up to you.
+
+    ✨ The distinguishing characteristic here is control. We have all the control to decide what is "this" equal to.
+
+    ✨ Bind is method on functions and it returns the copy of the function where "this" is set to the first argument passed into .bind().
+    We need to call the function to run it.
+
+    ✨ .apply() and call() are similar. They will change the value inside of the function and run it immediately.
+
+    ✨ If we don't pass arguments into .apply() and .call(), they are the same.  But when we do pass arguments, they are slightly different in syntax. But the output would be identical.
+
+
+       ✏  logThisWithArguments.apply({name: 'Ayu'}, ['hi', 'Ayu'])
+                                      -----------  -------------
+                                           |             |
+                                           |             |
+                                           V             V 
+                                     "this" value    in brackets
+
+
+       ✏  logThisWithArguments.call({name: 'Ayu'}, 'hi', 'Ayu')
+                                                  -----------
+                                                       |
+                                                       |
+                                                       V 
+                                                 without brackets
+
+
+    ✨ Some details: 
+        Function returned from .bind() cannot be bound to a different `this` value ever again.
+        In other words, functions can only be bound once.
+
+        ◻ Side note:    
+        
+            boundOnce.bind({ name: 'why even try?' })();
+                                                     --
+                                                     |
+                                                     |
+                                                     V 
+                                            To call the function
+
+
+
+📝 Case 5: In a callback function, apply the above rules methodically.
+
+    ✨ Callback functions are at the mercy of higher-order function that pass into.
+        So we need to inspect the higher-order function, figure out what it does and decide which case (1, 2, 3 or 4) applies.
+
